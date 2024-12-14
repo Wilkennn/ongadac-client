@@ -45,7 +45,7 @@ const NovoFeedback = ({ addFeedback, notifySuccess, notifyError }) => {
     };
   
     try {
-      const response = await fetch('http://localhost:3000/api/feedback', {
+      const response = await fetch('https://ongadac-server.vercel.app/api/feedback', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(feedback),

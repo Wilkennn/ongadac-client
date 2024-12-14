@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:3001/api/tarefa";
+const API_URL = "https://ongadac-server.vercel.app/api/tarefa";
 
 export const TarefaService = {
   async addTarefa(novaTarefa, usuariosIds) {

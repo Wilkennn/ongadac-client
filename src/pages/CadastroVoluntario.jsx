@@ -39,7 +39,7 @@ const CadastroVoluntario = () => {
         };
 
         try {
-            const response = await fetch(`http://localhost:3000/api/usuario/${id}/voluntario`, {
+            const response = await fetch(`https://ongadac-server.vercel.app/api/usuario/${id}/voluntario`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
