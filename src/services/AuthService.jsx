@@ -5,17 +5,19 @@ const API_URL = 'https://ongadac-server.vercel.app/api';
 class AuthService {
 
     async login(email, senha) {
-        return axios.post(`${API_URL}/auth/login`, { email, senha })
-            .then(response => {
-                if (response.data.token) {
-                    localStorage.setItem('token', response.data.token); // Armazena o token separadamente
-                    localStorage.setItem('user', JSON.stringify(response.data.user)); // Armazena o usuário
-                    return response.data;
-                }
-            })
-            .catch(error => {   
-                throw error;
-            });
+        try {
+            const response = await axios.post(`${API_URL}/auth/login`, { email, senha });
+
+            if (response.data?.token && response.data?.user) {
+                localStorage.setItem('token', response.data.token); // Armazena o token
+                localStorage.setItem('user', JSON.stringify(response.data.user)); // Armazena o usuário
+            }
+
+            return response.data;
+        } catch (error) {
+            console.error('Erro ao fazer login:', error.response?.data || error.message);
+            throw new Error(error.response?.data?.message || 'Erro na requisição');
+        }
     }
 
     logout() {
