@@ -25,12 +25,13 @@ const Login = () => {
                 message.error('Erro ao realizar login. Verifique suas credenciais.');
             }
         } catch (error) {
-            message.error('Erro ao realizar login. Verifique suas credenciais.');
+            // Mostrar erro mais detalhado
+            console.error(error);
+            message.error('Erro ao realizar login. Tente novamente mais tarde.');
         } finally {
             setLoading(false);
         }
     };
-
 
     return (
         <div className="Login-container">
@@ -55,18 +56,12 @@ const Login = () => {
                             <Form.Item
                                 label="E-mail"
                                 name="email"
-                                
                                 rules={[
                                     { type: 'email', message: 'O e-mail inserido não é válido!' },
                                     { required: true, message: 'Por favor, insira seu e-mail!' },
                                 ]}
-                                className="register_email_help"
-                                style={{ width: '100rem !important' }}
                             >
-                                <Input
-                                    id="email"
-                                    onChange={(e) => handleChange('email', e.target.value)}
-                                />
+                                <Input />
                             </Form.Item>
                         </Col>
                     </Row>
@@ -75,32 +70,30 @@ const Login = () => {
                             <Form.Item
                                 label="Senha"
                                 name="senha"
-                                className='camposs'
-                                rules={[{ required: true, message: 'Por favor, insira sua senha!' }]}
+                                rules={[
+                                    { required: true, message: 'Por favor, insira sua senha!' },
+                                    { min: 6, message: 'A senha deve ter pelo menos 6 caracteres.' },
+                                ]}
                                 hasFeedback
                             >
-                                <Input.Password
-                                    id="senha"
-                                    onChange={(e) => handleChange('senha', e.target.value)}
-                                />
+                                <Input.Password />
                             </Form.Item>
                         </Col>
                     </Row>
                     <Form.Item>
-                        <Button type="primary" htmlType="submit" className='botaoCad' loading={loading}>
+                        <Button type="primary" htmlType="submit" loading={loading} style={{marginLeft: '10rem'}}>
                             Entrar
                         </Button>
                         <div className='possuiConta'>
                             <p style={{ margin: 0 }}>
                                 Ainda não tem cadastro?
                                 <Link to="/Cadastro">
-                                    <span style={{ fontWeight: 'bold', color: '#1890ff', marginLeft: '5px' }}> Cadastre-se </span>
+                                    <span style={{ fontWeight: 'bold', color: '#1890ff', marginLeft: '15px' }}> Cadastre-se </span>
                                 </Link>
-                                <span style={{margin: '2.4px'}}> | </span>
-                                <Link to="/recover-password" style={{ color: '#FF743C', fontWeight: 'bold'}}> Esqueceu sua senha?</Link>
+                                <span style={{ margin: '2.4px' }}> | </span>
+                                <Link to="/recover-password" style={{ color: '#FF743C', fontWeight: 'bold' }}> Esqueceu sua senha?</Link>
                             </p>
                         </div>
-                        
                     </Form.Item>
                 </Form>
             </div>
